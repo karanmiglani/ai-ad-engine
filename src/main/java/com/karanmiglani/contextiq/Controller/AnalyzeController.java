@@ -6,8 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.karanmiglani.contextiq.DTO.AnalyzeRequest;
+import com.karanmiglani.contextiq.DTO.GeminiResponse;
 import com.karanmiglani.contextiq.DTO.WebpageContent;
 import com.karanmiglani.contextiq.Service.ContentExctractorService;
+import com.karanmiglani.contextiq.Service.GeminiService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -17,9 +19,11 @@ import lombok.RequiredArgsConstructor;
 public class AnalyzeController {
 
     private final ContentExctractorService contentExctractorService;
+    private final GeminiService  geminiService;
 
     @PostMapping("/analyze")
-    public WebpageContent  analyze(@RequestBody AnalyzeRequest request){
-        return contentExctractorService.extract(request.getUrl());
+    public GeminiResponse  analyze(@RequestBody AnalyzeRequest request){
+        WebpageContent content =  contentExctractorService.extract(request.getUrl());
+        return geminiService.classify(content);
     }
 }
