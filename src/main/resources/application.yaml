@@ -1,0 +1,13 @@
+spring:
+    application:
+        name: contextiq
+    datasource:
+        url: jdbc:mysql://localhost:3306/context_iq
+        username: sa
+        password:  1234
+    jpa:
+        hibernate:
+            ddl-auto: update
+        show-sql: true
+server:
+  port: 8080
